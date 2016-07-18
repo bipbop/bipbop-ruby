@@ -85,6 +85,8 @@ puts (placa.xpath("string(//BPQL//body//marca/.)"));
 
 Criando um __PUSH__
 
+A criação de PUSHES permite captura/monitoramento, sobre uma determinada fonte de dados, através de uma consulta segundo o padrão bpql.
+
 ```ruby
 
 push = Bipbop::Client::Push.new(webservice)
@@ -95,7 +97,7 @@ id = response.xpath('//body//id').text
 
 ```
 
-Nesse caro para a sua url de callback, será retornado o documento gerado, e são enviados os seguintes parametros no header do server:
+Nesse caso para a sua url de callback, será retornado o documento bpql gerado, e são enviados os seguintes parametros no header do server:
 
 ```ruby
 request["HTTP_X_BIPBOP_VERSION"]
@@ -105,11 +107,15 @@ request["HTTP_X_BIPBOP_DOCUMENT_LABEL"]
 ```
 __ABRINDO__ um PUSH
 
+Com este método é possível visualizar o documento bpql capturado. 
+
 ```ruby
 puts push.open(id)
 ```
 
 __REMOVENDO__ um PUSH
+
+Com este método é possível remover determinado PUSH da lista de uma apiKey.
 
 ```ruby
 push.delete(id)
