@@ -95,7 +95,7 @@ id = response.xpath('//body//id').text
 
 ```
 
-Nesse caro para a sua url de callback, será retornado o documento gerado, e são enviados os seguintes parametros no header do server:
+Nesse caso para a sua url de callback, será retornado o documento gerado, e são enviados os seguintes parametros no header do server:
 
 ```ruby
 request["HTTP_X_BIPBOP_VERSION"]
