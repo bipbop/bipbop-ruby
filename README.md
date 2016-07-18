@@ -25,7 +25,7 @@ O primeiro passo é saber quais são esses bancos. Para isso temos a classe `Ser
 ```ruby
 require 'bipbop'
 
-Bipbop::Client::Config.new({:api_key => # sua chave #})
+Bipbop::Client::Config.new({:bipbop_api_key => # sua chave #})
 
 webservice = Bipbop::Client::Webservice.new
 service_discovery = Bipbop::Client::ServiceDiscovery.factory(webservice)
