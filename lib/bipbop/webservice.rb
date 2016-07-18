@@ -28,6 +28,7 @@ module Bipbop
         document
     
       end
+      protected
       # Realiza um assertion do documento
       def assert(doc)
         node = doc.xpath('//BPQL//header//exception')
