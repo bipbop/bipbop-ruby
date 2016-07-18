@@ -13,7 +13,7 @@ Biblioteca em Ruby para interação com a Bipbop API. Com ela você pode fazer c
 Existe uma classe especial chamada `NameByCPFCNPJ` cujo método estático *evaluate* pode ser usado para consultar o nome através do CPF/CNPJ, passando-se o CPF/CNPJ como string e opcionalmente a data de nascimento como TIME:
 
 ```ruby
-puts Bipbop::Client::NameByCpfCnpj.evaluate($cpf, $nasc)
+puts Bipbop::Client::NameByCpfCnpj.evaluate(cpf, nasc)
 ```
 
 # Como utilizar
