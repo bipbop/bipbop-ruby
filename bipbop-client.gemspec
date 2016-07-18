@@ -11,7 +11,7 @@ Gem::Specification.new do |spec|
   spec.email         = ["otaviolcarvalho@gmail.com"]
   spec.summary       = "Library for communicating with BIPBOP"
   spec.description   = "Library for communicating with BIPBOP"
-  spec.homepage      = ""
+  spec.homepage      = "https://github.com/OTATA/bipbop-ruby"
   spec.license       = "MIT"
 
   spec.files         = Dir["{lib}/**/*.rb", "bin/*", "LICENSE", "*.md"]

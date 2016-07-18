@@ -10,7 +10,7 @@ Biblioteca em Ruby para interação com a Bipbop API. Com ela você pode fazer c
 
 # Buscando o nome através do CPF/CNPJ
 
-Existe uma classe especial chamada `NameByCPFCNPJ` cujo método estático *evaluate* pode ser usado para consultar o nome através do CPF/CNPJ, passando-se o CPF/CNPJ como string e opcionalmente a data de nascimento como DATETIME ou Inteiro:
+Existe uma classe especial chamada `NameByCPFCNPJ` cujo método estático *evaluate* pode ser usado para consultar o nome através do CPF/CNPJ, passando-se o CPF/CNPJ como string e opcionalmente a data de nascimento como TIME:
 
 ```ruby
 puts Bipbop::Client::NameByCpfCnpj.evaluate($cpf, $nasc)
@@ -25,7 +25,7 @@ O primeiro passo é saber quais são esses bancos. Para isso temos a classe `Ser
 ```ruby
 require 'bipbop'
 
-Bipbop::Client::Config.new({:api_key => # sua chave #})
+Bipbop::Client::Config.new({:bipbop_api_key => # sua chave #})
 
 webservice = Bipbop::Client::Webservice.new
 service_discovery = Bipbop::Client::ServiceDiscovery.factory(webservice)
@@ -79,6 +79,46 @@ puts placa
 
 // Recuperando a marca do veículo
 puts (placa.xpath("string(//BPQL//body//marca/.)"));
+```
+
+#PUSH
+
+Criando um __PUSH__
+
+A criação de PUSHES permite captura/monitoramento, sobre uma determinada fonte de dados, através de uma consulta segundo o padrão bpql.
+
+```ruby
+
+push = Bipbop::Client::Push.new(webservice)
+response = push.create('suaLabel', 'urlDeCallBack' , "SELECT FROM 'PLACA'.'CONSULTA'", {'placa' => 'XXX0000'})
+
+# pegando o id do push criado
+id = response.xpath('//body//id').text
+
+```
+
+Nesse caso para a sua url de callback, será retornado o documento bpql gerado, e são enviados os seguintes parametros no header do server:
+
+```ruby
+request["HTTP_X_BIPBOP_VERSION"]
+request["HTTP_X_BIPBOP_DOCUMENT_ID"] # Organizar os documentos por este ID #
+request["HTTP_X_BIPBOP_DOCUMENT_LABEL"]
+
+```
+__ABRINDO__ um PUSH
+
+Com este método é possível visualizar o documento bpql capturado. 
+
+```ruby
+puts push.open(id)
+```
+
+__REMOVENDO__ um PUSH
+
+Com este método é possível remover determinado PUSH da lista de uma apiKey.
+
+```ruby
+push.delete(id)
 ```
 
 # Mais informações
