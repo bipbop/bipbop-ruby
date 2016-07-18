@@ -28,3 +28,19 @@ tabela_consulta.get_fields() { |field|
 puts webservice.post("SELECT FROM 'PLACA'.'CONSULTA'", {
     "placa" => "OGD1557"
 })
+
+#PUSH
+push = Bipbop::Client::Push.new(webservice)
+response = push.create('suaLabel',  '', "SELECT FROM 'PLACA'.'CONSULTA'", {'placa' => 'OGD1557'})
+
+puts response
+
+# pegando o id do push criado
+id = response.xpath('//body//id').text
+puts id
+
+# abrindo um push criado
+puts push.open(id)
+
+# removendo um push
+push.delete(id)

@@ -81,6 +81,40 @@ puts placa
 puts (placa.xpath("string(//BPQL//body//marca/.)"));
 ```
 
+#PUSH
+
+Criando um __PUSH__
+
+```ruby
+
+push = Bipbop::Client::Push.new(webservice)
+response = push.create('suaLabel', 'urlDeCallBack' , "SELECT FROM 'PLACA'.'CONSULTA'", {'placa' => 'XXX0000'})
+
+# pegando o id do push criado
+id = response.xpath('//body//id').text
+
+```
+
+Nesse caro para a sua url de callback, será retornado o documento gerado, e são enviados os seguintes parametros no header do server:
+
+```ruby
+request["HTTP_X_BIPBOP_VERSION"]
+request["HTTP_X_BIPBOP_DOCUMENT_ID"] # Organizar os documentos por este ID #
+request["HTTP_X_BIPBOP_DOCUMENT_LABEL"]
+
+```
+__ABRINDO__ um PUSH
+
+```ruby
+puts push.open(id)
+```
+
+__REMOVENDO__ um PUSH
+
+```ruby
+push.delete(id)
+```
+
 # Mais informações
 
 Para mais informações e aquisição de uma chave de api acesse [http://api.bipbop.com.br](http://api.bipbop.com.br).
